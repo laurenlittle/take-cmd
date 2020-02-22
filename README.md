@@ -1,9 +1,9 @@
 # Take-cmd
 
 ## Table of contents
-* [General info](#general-info)
+* [Introduction](#introduction)
 * [Technologies](#technologies)
-* [Setup](#setup)
+* [Installation](#installation)
 
 
 ## Introduction
