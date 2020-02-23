@@ -1,0 +1,34 @@
+{
+  "name": "take-cmd",
+  "version": "1.0.0",
+  "description": "Take controll of your career with the Career Management Document",
+  "main": "index.js",
+  "scripts": {
+    "webpack-dev-server": "webpack-dev-server",
+    "webpack": "webpack",
+    "debug": "node --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js",
+    "prod": "npm run webpack -- --env.mode production",
+    "dev": "npm run webpack-dev-server -- --env.mode development --watch",
+    "prod:debug": "npm run debug -- --env.mode production",
+    "dev:debug": "npm run debug -- --env.mode development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laurenlittle/take-cmd.git"
+  },
+  "keywords": [],
+  "author": "Lauren Little",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.4.2",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
