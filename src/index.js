@@ -1,6 +1,5 @@
-import makeButton from './button';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Routes from './Routes';
 
-const button = makeButton('Yay a button!');
-document.body.appendChild(button);
-
-console.log('hello worlds');
+ReactDOM.render(<Routes />, document.getElementById('app'));
