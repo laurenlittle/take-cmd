@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-// TODO add Layout Component
+import Layout from './Layout';
 
 const Dashboard = () => {
  return (
-   <div>
+   <Layout className='dashboard'>
      <h1>Dashboard</h1>
-   </div>
+   </Layout>
   );
 };
 
