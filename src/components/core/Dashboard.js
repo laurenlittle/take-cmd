@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import Layout from './Layout';
+import DashLayout from './DashLayout';
 
 const Dashboard = () => {
  return (
-   <Layout className='dashboard'>
+   <DashLayout className='dashboard'>
      <h1>Dashboard</h1>
-   </Layout>
+   </DashLayout>
   );
 };
 
