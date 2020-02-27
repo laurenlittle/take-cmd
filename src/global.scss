@@ -1,3 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:500,700&display=swap');
+
+html {
+  font-size: 62.5%;
+}
+
 body {
+  box-sizing: border-box;
   background-color: #efefef;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1.7;
+  padding: 3rem;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
