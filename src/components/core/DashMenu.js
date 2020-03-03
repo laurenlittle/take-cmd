@@ -13,18 +13,18 @@ const isActive = (history, path) => {
 
 const DashMenu = () => {
   return (
-    <nav class={styles.navbar}>
-      <div className='header-logo'>
+    <nav className={styles.navbar}>
+      <div className={styles.headerLogo}>
         <Link to='/'>Take-CMD</Link>
       </div>
-      <ul>
-        <li className='menu-item'>
-          <Link to='/calendar'><i class="far fa-calendar-check"></i></Link>
+      <ul className={styles.menuItems}>
+        <li className={styles.singleMenuItem}>
+          <Link to='/calendar'><i className="far fa-calendar-check"></i></Link>
         </li>
-        <li className='menu-item'>
-          <Link to='/profile'><i class="fas fa-user-circle"></i></Link>
+        <li className={styles.singleMenuItem}>
+          <Link to='/profile'><i className="fas fa-user-circle"></i></Link>
         </li>
-        <li className='menu-item menu-item-btn'>
+        <li className={`${styles.singleMenuItem} ${styles.menuItemBtn}`}>
           <Link to='/signout'>Sign Out</Link>
         </li>
       </ul>

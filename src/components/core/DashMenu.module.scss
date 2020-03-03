@@ -3,6 +3,25 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
-.header-logo {
+.headerLogo {
   font-size: 1.5rem;
+}
+
+.menuItems {
+  list-style-type: none;
+}
+
+.singleMenuItem {
+  display: inline-block;
+}
+
+.menuItemBtn {
+  color: #15B44B;
+  border: 1px solid #15B44B;
+  padding: 1rem;
+
+  &:hover {
+    color: #fff;
+    background: #15B44B;
+  }
 }
