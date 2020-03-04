@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './AddDocument.module'
 
 
-const AddDocument = () => {
+const AddDocument = ({onCreate}) => {
 
   const [formFields, setFormFields] = useState({
     title: '',
@@ -12,9 +12,8 @@ const AddDocument = () => {
 
   const { title, description } = formFields;
 
-  const [error, isError] = useState(false);
-  const [success, isSuccess] = useState(false);
-  const [loading, isLoading] = useState(false);
+  // const [error, isError] = useState(false);
+  // const [success, isSuccess] = useState(false);
 
   const handleChange = name => e => {
     setFormFields({
@@ -25,7 +24,7 @@ const AddDocument = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // localStorage.setItem('key', 'value')
+    onCreate(formFields);
 
     console.log(formFields)
   }
