@@ -1,27 +1,71 @@
 .navbar {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  background: #fff;
+  border-bottom: 1px solid #efefef;
 }
 
 .headerLogo {
-  font-size: 1.5rem;
+  font-size: 2.8rem;
+  line-height: 1.7;
+  text-decoration: none;
+  color: #15B44B;
+
+  i {
+    margin-right: 1rem;
+  }
 }
 
 .menuItems {
   list-style-type: none;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  justify-self: end;
+
+  li {
+    display:inline-block;
+    vertical-align: middle;
+  }
 }
 
 .singleMenuItem {
-  display: inline-block;
+  transition: 0.3s ease-in;
+}
+
+.singleMenuItem:not(.menuItemBtn) {
+  font-size: 4rem;
+  margin-right: 4rem;
+  color: #AAB9CE;
+  transition: 0.3s ease-in;
+
+  &:link,
+  &:visited {
+    color: #AAB9CE; // extend
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+  color: #15B44B;
+  }
 }
 
 .menuItemBtn {
-  color: #15B44B;
   border: 1px solid #15B44B;
   padding: 1rem;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #15B44B;
 
-  &:hover {
-    color: #fff;
+  &:link,
+  &:visited {
+    color: #15B44B; // extend
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
     background: #15B44B;
+    color: #fff;
   }
 }
