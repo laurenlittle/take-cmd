@@ -12,9 +12,6 @@ const AddDocument = ({onCreate}) => {
 
   const { title, description } = formFields;
 
-  // const [error, isError] = useState(false);
-  // const [success, isSuccess] = useState(false);
-
   const handleChange = name => e => {
     setFormFields({
       ...formFields,
@@ -25,6 +22,11 @@ const AddDocument = ({onCreate}) => {
   const handleSubmit = e => {
     e.preventDefault();
     onCreate(formFields);
+    setFormFields({
+      ...formFields,
+      title: '',
+      description: ''
+    })
 
     console.log(formFields)
   }
@@ -32,7 +34,6 @@ const AddDocument = ({onCreate}) => {
   const addDocumentForm = () => (
     <form onSubmit={handleSubmit}>
       <div className={styles.formItem}>
-        <label htmlFor='title-input'>Title</label>
          <input
           id='title-input'
           className={styles.formTitle}
@@ -40,16 +41,19 @@ const AddDocument = ({onCreate}) => {
           value={title || ''}
           onChange={handleChange('title')}
           required
+          title='Title'
+          placeholder='Title'
           />
       </div>
       <div className={styles.formItem}>
-        <label htmlFor='desc-text'>Description</label>
          <textarea
           id='desc-text'
           className={styles.formDescription}
           value={description}
           onChange={handleChange('description')}
           required
+          title='Description'
+          placeholder='Description'
           ></textarea>
       </div>
       <button className={styles.btnSubmit}>+ Add to CMD</button>
