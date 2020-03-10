@@ -3,13 +3,45 @@
 }
 
 .formTitle {
+  margin-top: 2rem;
+}
 
+.formTitle,
+.formDescription {
+  border-radius: 3px;
+  padding: 1rem;
+  width: 85%;
+  font-size: 1.6rem;
+  font-weight: bold;
+
+  &:focus {
+    outline: #15B44B auto 5px;
+  }
 }
 
 .formDescription {
-
+  margin: 2rem 0;
 }
 
 .btnSubmit {
-  
+  border: 1px solid #15B44B;
+  padding: 1rem;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #15B44B;
+  width: 85%;
+  font-size: 1.6rem;
+  transition: 0.3s ease-in;
+
+  &:link,
+  &:visited {
+    color: #15B44B; // extend
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: #15B44B;
+    color: #fff;
+  }
 }
