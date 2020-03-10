@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import DashLayout from './DashLayout';
 import AddDocument from './AddDocument';
 import DocumentsList from './DocumentsList';
+import styles from './Dashboard.module';
 
 const Dashboard = () => {
 
@@ -27,10 +28,18 @@ const Dashboard = () => {
   };
 
  return (
-   <DashLayout className='dashboard'>
-     <h1>Dashboard</h1>
-     <DocumentsList docList={documentsList} />
+  <DashLayout className={styles.dashboard}>
+  
+    <section className={styles.dashLeft}>
+      <h1>Discover Your Accomplishments</h1>
+      <p>Search and Sort</p>
+      <DocumentsList docList={documentsList} />
+    </section>
+
+    <section className={styles.dashRight}>
      <AddDocument onCreate={handleCreatedDocument} />
+    </section>  
+
    </DashLayout>
   );
 };
