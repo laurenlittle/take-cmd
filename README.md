@@ -16,16 +16,13 @@ Inspired by the article: https://alistapart.com/article/the-career-management-do
 
 ## Technologies
 This project has been created with:
-* Webpack version:
-* React version:
-* Firebase Cloud Firestore
-* etc
-* etc
-
+* React: 16.12.0
+* Firebase: 7.10.0
+* Webpack: 4.41.6
 
 ## Installation
 To run this project, install it locally using npm:
 ```
 $ npm install
-$ npm start
+$ npm run dev
 ```
