@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { firestore } from '../../firebase';
 import DashLayout from './DashLayout';
 import AddDocument from './AddDocument';
 import DocumentsList from './DocumentsList';
@@ -6,22 +7,24 @@ import styles from './Dashboard.module';
 
 const Dashboard = () => {
 
-  const defaultDocsList = [
-    {
-      id: 1,
-      title: 'a title',
-      description: 'a description'
-    },
-    {
-      id: 2,
-      title: 'yet another title',
-      description: 'yet another description'
-    }
-  ];
+  const [documentsList, setDocumentsList] = useState([]);
 
-  const [documentsList, setDocumentsList] = useState(defaultDocsList);
+  const loadDocuments = async () => {
+    const snapshot =  await firestore.collection('documents').get();
+    
+    const documents = snapshot.docs.map(doc => {
+      return {
+        id: doc.id, 
+        ...doc.data()
+        }
+      });
+    
+    setDocumentsList(documents);
+  };
 
-  useEffect(() => console.log(documentsList), [documentsList]);
+  useEffect(() => {
+    loadDocuments();
+  }, []);
 
   const handleCreatedDocument = document => {
     setDocumentsList([document, ...documentsList]);
@@ -29,7 +32,7 @@ const Dashboard = () => {
 
  return (
   <DashLayout className={styles.dashboard}>
-  
+
     <section className={styles.dashLeft}>
       <h1>Discover Your Accomplishments</h1>
       <p>Search and Sort</p>
