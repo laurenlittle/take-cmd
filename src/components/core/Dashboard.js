@@ -11,11 +11,13 @@ const Dashboard = () => {
   const [documentsList, setDocumentsList] = useState([]);
 
   const loadDocuments = async () => {
-    const snapshot =  await firestore.collection('documents').get();
 
-    const documents = snapshot.docs.map(addIdToDoc);
+    // Subscribe to DB changes
+    firestore.collection('documents').onSnapshot(snapshot => {
+      const documents = snapshot.docs.map(addIdToDoc);
+      setDocumentsList(documents);
+    })
 
-    setDocumentsList(documents);
   };
 
   useEffect(() => {
@@ -23,26 +25,11 @@ const Dashboard = () => {
   }, []);
 
   const handleCreatedDocument = async document => {
-    // add document to DB
-    const firebaseDocRef = await firestore.collection('documents').add(document);
-
-    // get the documents reference in the db
-    const doc = await firebaseDocRef.get();
-    const newDoc = addIdToDoc(doc)
-
-    setDocumentsList([newDoc, ...documentsList]);
+    firestore.collection('documents').add(document);
   };
 
   const handleRemoveDocument = async id => {
-    const allDocs = documentsList;
-
-    // Remove from DB
-    await firestore.doc(`documents/${id}`).delete();
-
-    // Remove from state
-    const docs = allDocs.filter(doc => doc.id !== id) // keep docs with ids that don't match the one we want to delete
-
-    setDocumentsList(docs)
+    firestore.doc(`documents/${id}`).delete();
   }
 
  return (
