@@ -24,25 +24,17 @@ const Dashboard = () => {
     loadDocuments();
   }, []);
 
-  const handleCreatedDocument = async document => {
-    firestore.collection('documents').add(document);
-  };
-
-  const handleRemoveDocument = async id => {
-    firestore.doc(`documents/${id}`).delete();
-  }
-
  return (
   <DashLayout className={styles.dashboard}>
 
     <section className={styles.dashLeft}>
       <h1>Discover Your Accomplishments</h1>
       <p>Search and Sort</p>
-      <DocumentsList docList={documentsList} onRemove={handleRemoveDocument}  />
+      <DocumentsList docList={documentsList} />
     </section>
 
     <section className={styles.dashRight}>
-     <AddDocument onCreate={handleCreatedDocument} />
+     <AddDocument />
     </section>
 
    </DashLayout>

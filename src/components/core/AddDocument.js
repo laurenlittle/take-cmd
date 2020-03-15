@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './AddDocument.module'
+import { firestore } from '../../firebase';
+import styles from './AddDocument.module';
 
 
-const AddDocument = ({onCreate}) => {
+const AddDocument = () => {
 
   const [formFields, setFormFields] = useState({
     title: '',
@@ -21,14 +22,14 @@ const AddDocument = ({onCreate}) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onCreate(formFields);
+
+    firestore.collection('documents').add(formFields);
+
     setFormFields({
       ...formFields,
       title: '',
       description: ''
     })
-
-    console.log(formFields)
   }
 
   const addDocumentForm = () => (
