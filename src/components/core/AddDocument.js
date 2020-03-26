@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { firestore } from '../../firebase';
+import React, { useState } from 'react';
 import styles from './AddDocument.module';
 
+const AddDocument = ({addDocument}) => {
 
-const AddDocument = () => {
+const initialFormState = {
+  title: '',
+  description: ''
+};
 
-  const [formFields, setFormFields] = useState({
-    title: '',
-    description: ''
-  });
-
-  const { title, description } = formFields;
+const [document, setDocument] = useState(initialFormState);
 
   const handleChange = name => e => {
-    setFormFields({
-      ...formFields,
+    setDocument({
+      ...document,
       [name]: e.target.value
     })
   }
@@ -23,10 +20,9 @@ const AddDocument = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    firestore.collection('documents').add(formFields);
-
-    setFormFields({
-      ...formFields,
+    addDocument(document);
+    setDocument({
+      ...document,
       title: '',
       description: ''
     })
@@ -39,7 +35,8 @@ const AddDocument = () => {
           id='title-input'
           className={styles.formTitle}
           type='text'
-          value={title || ''}
+          name='title'
+          value={document.title}
           onChange={handleChange('title')}
           required
           title='Title'
@@ -50,7 +47,8 @@ const AddDocument = () => {
          <textarea
           id='desc-text'
           className={styles.formDescription}
-          value={description}
+          name='description'
+          value={document.description}
           onChange={handleChange('description')}
           required
           title='Description'
@@ -58,7 +56,6 @@ const AddDocument = () => {
           ></textarea>
       </div>
       <button className={styles.btnSubmit}>+ Add to CMD</button>
-
     </form>
   )
 
