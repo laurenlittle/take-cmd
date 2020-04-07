@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { firestore } from '../../firebase';
+import { firestore, auth } from '../../firebase';
 import { addIdToDoc } from '../../utilities';
 import DashLayout from './DashLayout';
 import AddDocument from './AddDocument';
 import EditDocument from './EditDocument';
 import Document from './Document';
+import Authentication from '../auth/Authentication';
 import styles from './Dashboard.module';
 
 const Dashboard = () => {
 
   const [documentsList, setDocumentsList] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
   const [editing, setEditing] = useState(false);
   const [currentDoc, setCurrentDoc] = useState();
   const [documentRef, setDocumentRef] = useState();
@@ -22,6 +24,23 @@ const Dashboard = () => {
     })
   };
 
+  let unsubscribeFromAuth = null;
+
+  const loadUser = async () => {
+    // Subscribe to user changes: fires on login/logout --> returns user obj or null
+    unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      setCurrentUser(user);
+    })
+  };
+
+  useEffect(() => {
+    loadDocuments();
+  }, []);
+
+  useEffect(() => {
+    loadUser();
+  }, [currentUser]);
+
   const addDocument = document => {
     firestore.collection('documents').add(document);
   };
@@ -33,10 +52,10 @@ const Dashboard = () => {
         title: currentDoc.title,
         description: currentDoc.description
       })
-      .then(function () {
+      .then(() => {
         console.log("Document successfully updated!");
       })
-      .catch(function (error) {
+      .catch(error => {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
       });
@@ -48,12 +67,10 @@ const Dashboard = () => {
     setDocumentRef(dbDocRef);
   }
 
-  useEffect(() => {
-    loadDocuments();
-  }, []);
-
  return (
   <DashLayout className={styles.dashboard}>
+
+    <Authentication user={currentUser} />
 
     <section className={styles.dashLeft}>
       <h1>Discover Your Accomplishments</h1>
