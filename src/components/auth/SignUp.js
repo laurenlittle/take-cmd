@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { auth, createUserProfile } from '../../firebase';
 
 const SignUp = () => {
 
@@ -10,6 +11,8 @@ const SignUp = () => {
 
   const [signUpInfo, setSignUpInfo] = useState(initialSignUpState);
 
+  const { displayName, email, password } = signUpInfo;
+
   const handleChange = e => {
     const { name, value } = e.target;
 
@@ -17,10 +20,23 @@ const SignUp = () => {
       ...signUpInfo,
       [name]: value
     })
+
+    //console.log({...signUpInfo}) // see console and fix
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+
+    try {
+      const {
+        user
+      } = auth.createUserWithEmailAndPassword(email, password);
+      // console.log({ displayName }) // value
+      createUserProfile(user, { displayName })
+
+    } catch (err) {
+      console.error(err)
+    }
 
     setSignUpInfo({
       ...signUpInfo,
