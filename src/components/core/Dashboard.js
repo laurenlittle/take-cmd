@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { firestore, auth, createUserProfile } from '../../firebase';
+import { firestore } from '../../firebase';
 import { addIdToDoc } from '../../utilities';
 import DashLayout from './DashLayout';
 import AddDocument from './AddDocument';
@@ -11,7 +11,6 @@ import styles from './Dashboard.module';
 const Dashboard = () => {
 
   const [documentsList, setDocumentsList] = useState([]);
-  // const [currentUser, setCurrentUser] = useState(null);
   const [editing, setEditing] = useState(false);
   const [currentDoc, setCurrentDoc] = useState();
   const [documentRef, setDocumentRef] = useState();
@@ -24,24 +23,9 @@ const Dashboard = () => {
     })
   };
 
-  // let unsubscribeFromAuth = null;
-
-  // const loadUser = async () => {
-  //   // Subscribe to user changes: fires on login/logout --> returns user obj or null
-  //   unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-  //     const user = await createUserProfile(userAuth);
-  //     console.log(user);
-  //     setCurrentUser(user);
-  //   })
-  // };
-
   useEffect(() => {
     loadDocuments();
   }, []);
-
-  // useEffect(() => {
-  //   loadUser();
-  // }, []);
 
   const addDocument = document => {
     firestore.collection('documents').add(document);
@@ -72,7 +56,6 @@ const Dashboard = () => {
  return (
   <DashLayout className={styles.dashboard}>
 
-    {/* <Authentication user={currentUser} /> */}
     <Authentication />
 
     <section className={styles.dashLeft}>
