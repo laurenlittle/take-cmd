@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './AddDocument.module';
+import { auth } from '../../firebase';
 
 const AddDocument = ({addDocument}) => {
 
@@ -9,6 +10,21 @@ const initialFormState = {
 };
 
 const [document, setDocument] = useState(initialFormState);
+
+const { title, description } = document;
+const { uid, displayName, photoURL, email } = auth.currentUser || {};
+
+const documentInfo = {
+  title,
+  description,
+  user: {
+    uid,
+    displayName,
+    email,
+    photoURL
+  },
+  createdAt: new Date(),
+};
 
   const handleChange = name => e => {
     setDocument({
@@ -20,7 +36,7 @@ const [document, setDocument] = useState(initialFormState);
   const handleSubmit = e => {
     e.preventDefault();
 
-    addDocument(document);
+    addDocument(documentInfo);
     setDocument({
       ...document,
       title: '',
